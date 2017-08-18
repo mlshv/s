@@ -7,8 +7,13 @@
   "author": "Mikhail Malyshev <mlshv42@ya.ru>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "foreman": "^2.0.0",
+    "mongoose": "^4.11.7",
     "morgan": "^1.8.2",
+    "nodemon": "^1.11.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.11"
