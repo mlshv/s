@@ -1,0 +1,20 @@
+{
+  "name": "s",
+  "version": "1.0.0",
+  "description": "Dead simple personal note board",
+  "main": "app.js",
+  "repository": "git@github.com:mlshv/s.git",
+  "author": "Mikhail Malyshev <mlshv42@ya.ru>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-scripts": "1.0.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
