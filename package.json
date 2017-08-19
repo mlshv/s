@@ -14,13 +14,16 @@
     "mongoose": "^4.11.7",
     "morgan": "^1.8.2",
     "nodemon": "^1.11.0",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.11",
     "styled-components": "^2.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-dev": "nf start -p 3000",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
