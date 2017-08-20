@@ -4,9 +4,13 @@ import styled from 'styled-components';
 import Button from '../common/Button';
 
 const NoteSt = styled.div`
-  margin: 1rem 0;
+  margin: .5rem 0;
   padding: 1rem;
-  border: 1px solid #171717;
+  border-radius: .25rem;
+  background: #fff;
+  @media screen and (min-device-width: 48rem) {
+    padding: 1.5rem;
+  }
 `;
 
 const Title = styled.h2`

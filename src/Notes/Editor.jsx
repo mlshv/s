@@ -2,31 +2,77 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Button from '../common/Button';
+import checkMark from '../icons/check_mark.svg';
 
 const EditorSt = styled.section`
   display: flex;
   flex-wrap: wrap;
+  margin: .5rem;
+  padding: 0;
+  border-radius: .5rem;
+`;
+
+const TextInputs = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 100%;
+  padding: 1rem;
+  padding-bottom: 0rem;
+  background: #fff;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  @media screen and (min-device-width: 48rem) {
+    padding: 1.5rem;
+  }
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-basis: 100%;
+  padding: .5rem;
+  padding-top: 0;
+  background: #fff;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
 `;
 
 const TitleInput = styled.input`
-  flex-basis: 100%;
   margin-bottom: .5rem;
-  padding: .25rem;
+  padding: 0;
   font-size: 1.25rem;
+  font-weight: 700;
   border: none;
-  border-bottom: 1px solid #171717;
-  border-radius: .25rem;
   outline: none;
+  color: #444;
+  background: transparent;
 `;
 
 const NoteInput = styled.textarea`
   flex-basis: 100%;
   min-height: 100px;
   margin-bottom: .5rem;
-  padding: .25rem;
+  padding: 0;
   font-size: 1rem;
-  border: 1px solid #171717;
-  border-radius: .25rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  resize: none;
+`;
+
+const RoundButton = Button.extend`
+  padding: 1rem;
+  border-none;
+  border-radius: 50%;
+  background: #343434;
+`;
+
+const CheckMark = styled.span`
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  background: url(${checkMark});
+  content: " ";
 `;
 
 class Editor extends Component {
@@ -57,10 +103,10 @@ class Editor extends Component {
     }
     this.props.handleSave({ title, text }).then(
       () => {
-        this.setState({ title: '' });
+        this.setState({ title: '', text: '' });
       },
       () => {
-        this.setState({ text: '' });
+        this.setState({ title: '', text: '' });
       },
     );
   }
@@ -71,9 +117,26 @@ class Editor extends Component {
         <div className="row">
           <div className="col-xs-12 col-md-8 col-md-offset-2">
             <EditorSt>
-              <TitleInput placeholder="Title" onChange={this.handleTitleChange} />
-              <NoteInput placeholder="Note" onChange={this.handleNoteChange} />
-              <Button onClick={this.save}>Save</Button>
+              <TextInputs>
+                <TitleInput
+                  placeholder="Title..."
+                  onChange={this.handleTitleChange}
+                  value={this.state.title}
+                />
+                <NoteInput
+                  placeholder="Go note or go home..."
+                  onChange={this.handleNoteChange}
+                  value={this.state.text}
+                />
+              </TextInputs>
+              <Buttons>
+                <div />
+                <div>
+                  <RoundButton onClick={this.save}>
+                    <CheckMark alt="" />
+                  </RoundButton>
+                </div>
+              </Buttons>
             </EditorSt>
           </div>
         </div>
