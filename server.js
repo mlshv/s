@@ -34,7 +34,7 @@ router.get('/', (req, res) => {
 router
   .route('/notes')
   .get((req, res) => {
-    Note.find({}).sort('-date').exec((err, notes) => {
+    Note.find({}).sort('-createdAt').exec((err, notes) => {
       if (err) res.send(err);
       res.json(notes);
     });

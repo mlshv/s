@@ -12,18 +12,19 @@ class App extends Component {
     this.state = {
       notes: [],
     };
-    this.update = this.update.bind(this);
+    this.fetchNotes = this.fetchNotes.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
 
   componentDidMount() {
-    this.update();
+    this.fetchNotes();
   }
 
-  update() {
+  fetchNotes() {
     ApiManager.fetchNotes().then(
       (res) => {
+        console.log(res.data);
         this.setState({ notes: res.data });
       },
       () => {
@@ -35,7 +36,7 @@ class App extends Component {
   handleSave(note) {
     return new Promise((resolve, reject) =>
       ApiManager.saveNote(note).then(() => {
-        this.update();
+        this.fetchNotes();
         resolve();
       }, reject),
     );
