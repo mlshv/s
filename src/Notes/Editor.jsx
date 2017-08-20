@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import Button from '../common/Button';
 
 const EditorSt = styled.section`
   display: flex;
@@ -29,15 +30,6 @@ const NoteInput = styled.textarea`
   font-size: 1rem;
   border: 1px solid #171717;
   border-radius: .25rem;
-`;
-
-const SaveButton = styled.button`
-  margin: 0;
-  padding: .5rem 1rem;
-  font-size: .875rem;
-  border: none;
-  border-radius: .25rem;
-  cursor: pointer;
 `;
 
 class Editor extends Component {
@@ -85,7 +77,7 @@ class Editor extends Component {
           value={this.state.title}
         />
         <NoteInput placeholder="Note" onChange={this.handleNoteChange} value={this.state.text} />
-        <SaveButton onClick={this.save}>Save</SaveButton>
+        <Button onClick={this.save}>Save</Button>
       </EditorSt>
     );
   }

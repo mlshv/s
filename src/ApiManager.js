@@ -13,4 +13,18 @@ export default {
       axios.post(`${API_URL}/notes`, note).then(resolve).catch(reject);
     });
   },
+  deleteNote(note) {
+    return new Promise((resolve, reject) => {
+      axios
+        .delete(`${API_URL}/notes`, { params: { id: note } })
+        .then((response) => {
+          if (response.data.success) {
+            resolve();
+          } else {
+            reject();
+          }
+        }, reject)
+        .catch(reject);
+    });
+  },
 };

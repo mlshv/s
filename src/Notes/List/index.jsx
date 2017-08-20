@@ -12,6 +12,7 @@ class List extends Component {
     this.state = {
       notes: [],
     };
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -20,10 +21,34 @@ class List extends Component {
     });
   }
 
+  handleDelete(noteIndex) {
+    const removeNote = (index) => {
+      this.setState(prevState => ({
+        notes: [...prevState.notes.slice(0, index), ...prevState.notes.slice(index + 1)],
+      }));
+    };
+    this.props.handleDelete(this.state.notes[noteIndex]._id).then(
+      () => {
+        removeNote(noteIndex);
+      },
+      () => {
+        alert('Ошибочка вышла');
+      },
+    );
+  }
+
   render() {
     return (
       <ListSt>
-        {this.state.notes.map(note => <Note title={note.title} text={note.text} key={note._id} />)}
+        {this.state.notes.map((note, index) =>
+          (<Note
+            title={note.title}
+            text={note.text}
+            id={index}
+            key={note._id}
+            handleDelete={this.handleDelete}
+          />),
+        )}
       </ListSt>
     );
   }
@@ -31,6 +56,7 @@ class List extends Component {
 
 List.propTypes = {
   fetchNotes: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
 
 export default List;

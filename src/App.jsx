@@ -10,11 +10,14 @@ const App = () =>
     <div>
       <Header />
       <Switch>
-        <Route exact path="/" render={() => <NotesList fetchNotes={ApiManager.fetchNotes} />} />
         <Route
           exact
-          path="/editor"
-          render={() => <NoteEditor handleSave={ApiManager.saveNote} />}
+          path="/"
+          render={() =>
+            (<div>
+              <NoteEditor handleSave={ApiManager.saveNote} />
+              <NotesList fetchNotes={ApiManager.fetchNotes} handleDelete={ApiManager.deleteNote} />
+            </div>)}
         />
       </Switch>
     </div>

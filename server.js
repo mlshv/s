@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -33,7 +34,7 @@ router.get('/', (req, res) => {
 router
   .route('/notes')
   .get((req, res) => {
-    Note.find({}, (err, notes) => {
+    Note.find({}).sort('-date').exec((err, notes) => {
       if (err) res.send(err);
       res.json(notes);
     });
@@ -45,6 +46,11 @@ router
     note.save((err) => {
       if (err) res.send(err);
       res.json({ message: 'Note successfully added!' });
+    });
+  })
+  .delete((req, res) => {
+    Note.findById(req.query.id).remove().exec().then((result) => {
+      res.json({ success: result.result.n });
     });
   });
 
