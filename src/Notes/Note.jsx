@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Button from '../../common/Button';
+import Button from '../common/Button';
 
 const NoteSt = styled.div`
   margin: 1rem 0;

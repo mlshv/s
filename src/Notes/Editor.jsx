@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
 import Button from '../common/Button';
 
 const EditorSt = styled.section`
   display: flex;
   flex-wrap: wrap;
-  max-width: 800px;
-  margin: 1rem auto;
 `;
 
 const TitleInput = styled.input`
@@ -53,39 +50,40 @@ class Editor extends Component {
   }
 
   save() {
-    const title = this.state.title.trim();
-    const text = this.state.text.trim();
+    const title = this.state.title ? this.state.title.trim() : undefined;
+    const text = this.state.text ? this.state.text.trim() : undefined;
     if (!text) {
       return;
     }
     this.props.handleSave({ title, text }).then(
       () => {
-        this.props.history.push('/');
+        this.setState({ title: '' });
       },
       () => {
-        this.props.history.push('/');
+        this.setState({ text: '' });
       },
     );
   }
 
   render() {
     return (
-      <EditorSt>
-        <TitleInput
-          placeholder="Title"
-          onChange={this.handleTitleChange}
-          value={this.state.title}
-        />
-        <NoteInput placeholder="Note" onChange={this.handleNoteChange} value={this.state.text} />
-        <Button onClick={this.save}>Save</Button>
-      </EditorSt>
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-12 col-md-8 col-md-offset-2">
+            <EditorSt>
+              <TitleInput placeholder="Title" onChange={this.handleTitleChange} />
+              <NoteInput placeholder="Note" onChange={this.handleNoteChange} />
+              <Button onClick={this.save}>Save</Button>
+            </EditorSt>
+          </div>
+        </div>
+      </div>
     );
   }
 }
 
 Editor.propTypes = {
   handleSave: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
 };
 
-export default withRouter(Editor);
+export default Editor;

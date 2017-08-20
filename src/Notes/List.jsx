@@ -39,17 +39,23 @@ class List extends Component {
 
   render() {
     return (
-      <ListSt>
-        {this.state.notes.map((note, index) =>
-          (<Note
-            title={note.title}
-            text={note.text}
-            id={index}
-            key={note._id}
-            handleDelete={this.handleDelete}
-          />),
-        )}
-      </ListSt>
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-12 col-md-8 col-md-offset-2">
+            <ListSt>
+              {this.state.notes.map((note, index) =>
+                (<Note
+                  title={note.title}
+                  text={note.text}
+                  id={index}
+                  key={note._id}
+                  handleDelete={this.handleDelete}
+                />),
+              )}
+            </ListSt>
+          </div>
+        </div>
+      </div>
     );
   }
 }
