@@ -1,0 +1,40 @@
+{
+  "name": "s",
+  "version": "1.0.0",
+  "description": "Dead simple personal note board",
+  "main": "app.js",
+  "repository": "git@github.com:mlshv/s.git",
+  "author": "Mikhail Malyshev <mlshv42@ya.ru>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "flexboxgrid2": "^7.0.0-alpha7",
+    "foreman": "^2.0.0",
+    "mongoose": "^4.11.7",
+    "morgan": "^1.8.2",
+    "nodemon": "^1.11.0",
+    "normalize.css": "^7.0.0",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.2",
+    "react-scripts": "1.0.11",
+    "styled-components": "^2.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "start-dev": "nf start -p 3000",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0"
+  }
+}
