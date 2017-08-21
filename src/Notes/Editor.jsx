@@ -7,9 +7,14 @@ import checkMark from '../icons/check_mark.svg';
 const EditorSt = styled.section`
   display: flex;
   flex-wrap: wrap;
-  margin: .5rem;
+  margin: 0rem;
+  margin-top: .5rem;
   padding: 0;
   border-radius: .5rem;
+  @media screen and (min-width: 48rem) {
+    margin: .5rem;
+    margin-top: 1rem;
+  }
 `;
 
 const TextInputs = styled.div`
@@ -21,7 +26,7 @@ const TextInputs = styled.div`
   background: #fff;
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
-  @media screen and (min-device-width: 48rem) {
+  @media screen and (min-width: 48rem) {
     padding: 1.5rem;
   }
 `;
@@ -38,10 +43,12 @@ const Buttons = styled.div`
 `;
 
 const TitleInput = styled.input`
+  flex-basis: 100%;
   margin-bottom: .5rem;
   padding: 0;
+  font-family: 'Roboto', sans-serif;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 600;
   border: none;
   outline: none;
   color: #444;
@@ -54,8 +61,10 @@ const NoteInput = styled.textarea`
   margin-bottom: .5rem;
   padding: 0;
   font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
   border: none;
   outline: none;
+  color: #444;
   background: transparent;
   resize: none;
 `;

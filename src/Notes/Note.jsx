@@ -4,12 +4,15 @@ import styled from 'styled-components';
 import Button from '../common/Button';
 
 const NoteSt = styled.div`
-  margin: .5rem 0;
+  margin: .5rem -.5rem;
+  margin-bottom: 0;
   padding: 1rem;
+  padding-bottom: 0;
   border-radius: .25rem;
   background: #fff;
-  @media screen and (min-device-width: 48rem) {
-    padding: 1.5rem;
+  @media screen and (min-width: 48rem) {
+    margin: .5rem 0;
+    padding-bottom: 0;
   }
 `;
 
@@ -17,6 +20,13 @@ const Title = styled.h2`
   margin: 0;
   margin-bottom: .5rem;
   font-size: 1.25rem;
+  font-weight: 600;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  padding-bottom: 1rem;
 `;
 
 const Text = styled.p`
@@ -34,13 +44,15 @@ const Note = props =>
     <Text>
       {props.text}
     </Text>
-    <Button
-      onClick={() => {
-        props.handleDelete(props.id);
-      }}
-    >
-      Delete
-    </Button>
+    <Buttons>
+      <Button
+        onClick={() => {
+          props.handleDelete(props.id);
+        }}
+      >
+        Delete
+      </Button>
+    </Buttons>
   </NoteSt>);
 
 Note.propTypes = {
