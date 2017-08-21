@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Header from './Header';
 import ApiManager from './ApiManager';
 import NoteEditor from './Notes/Editor';
 import Notes from './Notes/List';
@@ -37,7 +36,7 @@ class App extends Component {
     return new Promise((resolve, reject) =>
       ApiManager.saveNote(note).then(() => {
         this.fetchNotes();
-        resolve();
+        resolve(1);
       }, reject),
     );
   }
@@ -62,7 +61,6 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Header />
           <Switch>
             <Route
               exact
