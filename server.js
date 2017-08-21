@@ -1,12 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Note = require('./model/notes');
 
 const app = express();
 const router = express.Router();
-const port = process.env.API_PORT || 3001;
+const port = 3001;
 
 mongoose.connect('mongodb://localhost:27017/s', {
   useMongoClient: true,
@@ -26,6 +27,8 @@ app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache');
   next();
 });
+
+app.use(express.static(path.resolve(__dirname, '.', 'build')));
 
 router.get('/', (req, res) => {
   res.json({ message: 'API Initialized!' });
@@ -53,6 +56,10 @@ router
       res.json({ success: result.result.n });
     });
   });
+
+app.use(/^\/(?!api).*/, (req, res) => {
+  res.sendFile(path.join(`${__dirname}/build/index.html`));
+});
 
 app.use('/api', router);
 
