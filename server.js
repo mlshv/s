@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const Note = require('./model/notes');
 
 const app = express();
-const router = express.Router();
+const apiRouter = express.Router();
 const port = 3001;
 
 mongoose.connect('mongodb://localhost:27017/s', {
@@ -30,11 +30,11 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.resolve(__dirname, 'build')));
 
-router.get('/', (req, res) => {
+apiRouter.get('/', (req, res) => {
   res.json({ message: 'API Initialized!' });
 });
 
-router
+apiRouter
   .route('/notes')
   .get((req, res) => {
     Note.find({}).sort('-createdAt').exec((err, notes) => {
@@ -57,11 +57,11 @@ router
     });
   });
 
-app.use(/^\/(?!api).*/, (req, res) => {
+app.use('/api', apiRouter);
+
+app.use(/\/*/, (req, res) => {
   res.sendFile(path.join(`${__dirname}/build/index.html`));
 });
-
-app.use('/api', router);
 
 app.listen(port, () => {
   console.log(`api running on port ${port}`);
