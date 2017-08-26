@@ -6,6 +6,7 @@
   "repository": "git@github.com:mlshv/s.git",
   "author": "Mikhail Malyshev <mlshv42@ya.ru>",
   "license": "MIT",
+  "homepage": "http://mlshv.me/s",
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",

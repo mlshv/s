@@ -28,7 +28,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.resolve(__dirname, '.', 'build')));
+app.use(express.static(path.resolve(__dirname, 'build')));
 
 router.get('/', (req, res) => {
   res.json({ message: 'API Initialized!' });
