@@ -27,7 +27,7 @@ class App extends Component {
         this.setState({ notes: res.data });
       },
       () => {
-        console.log("can't update");
+        console.log('cannot update');
       },
     );
   }
@@ -52,7 +52,7 @@ class App extends Component {
         removeNote(noteIndex);
       },
       () => {
-        alert('Ошибочка вышла');
+        console.log('cannot delete');
       },
     );
   }
@@ -64,7 +64,7 @@ class App extends Component {
           <Switch>
             <Route
               exact
-              path="/"
+              path={process.env.REACT_APP_ROOT_URL}
               render={() =>
                 (<div>
                   <NoteEditor handleSave={this.handleSave} />
