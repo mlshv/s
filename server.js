@@ -9,9 +9,21 @@ const app = express();
 const apiRouter = express.Router();
 const port = 3001;
 
-mongoose.connect('mongodb://localhost:27017/s', {
-  useMongoClient: true,
-});
+mongoose.Promise = global.Promise;
+
+mongoose
+  .connect('mongodb://localhost:27017/s', {
+    useMongoClient: true,
+  })
+  .then(
+    () => {
+      console.log('MongoDB connection opened');
+    },
+    () => {
+      console.log('Unable to connect to MongoDB! Run "service start mongod"');
+      process.exit(1);
+    },
+  );
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -37,10 +49,12 @@ apiRouter.get('/', (req, res) => {
 apiRouter
   .route('/notes')
   .get((req, res) => {
-    Note.find({}).sort('-createdAt').exec((err, notes) => {
-      if (err) res.send(err);
-      res.json(notes);
-    });
+    Note.find({})
+      .sort('-updatedAt')
+      .exec((err, notes) => {
+        if (err) res.send(err);
+        res.json(notes);
+      });
   })
   .post((req, res) => {
     const note = new Note();
@@ -52,16 +66,15 @@ apiRouter
     });
   })
   .delete((req, res) => {
-    Note.findById(req.query.id).remove().exec().then((result) => {
-      res.json({ success: result.result.n });
-    });
+    Note.findById(req.query.id)
+      .remove()
+      .exec()
+      .then((result) => {
+        res.json({ success: result.result.n });
+      });
   });
 
 app.use('/api', apiRouter);
-
-app.use(/\/*/, (req, res) => {
-  res.sendFile(path.join(`${__dirname}/build/index.html`));
-});
 
 app.listen(port, () => {
   console.log(`api running on port ${port}`);
