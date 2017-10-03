@@ -20,7 +20,7 @@ mongoose
       console.log('MongoDB connection opened');
     },
     () => {
-      console.log('Unable to connect to MongoDB! Run "service start mongod"');
+      console.log('Unable to connect to MongoDB! Run "service mongod start"');
       process.exit(1);
     },
   );
