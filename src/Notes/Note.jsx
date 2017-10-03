@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Linkify from 'react-linkify';
 import styled from 'styled-components';
 import Button from '../common/Button';
 
@@ -41,7 +42,9 @@ const Text = styled.p`
 const Note = props => (
   <NoteSt>
     {props.title && <Title>{props.title}</Title>}
-    <Text>{props.text}</Text>
+    <Text>
+      <Linkify>{props.text}</Linkify>
+    </Text>
     <Buttons>
       <Button
         onClick={() => {
