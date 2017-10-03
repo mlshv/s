@@ -26,13 +26,16 @@ const Title = styled.h2`
 const Buttons = styled.div`
   display: flex;
   flex-direction: row-reverse;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  margin: 0 -0.5rem;
 `;
 
 const Text = styled.p`
   margin: 0;
   margin-bottom: 0.5rem;
   font-size: 1rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 `;
 
 const Note = props => (
@@ -45,7 +48,7 @@ const Note = props => (
           props.handleDelete(props.id);
         }}
       >
-        Del
+        <i className="fa fa-lg fa-trash" />
       </Button>
     </Buttons>
   </NoteSt>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Button from '../common/Button';
 import checkMark from '../icons/check_mark.svg';
 
 const EditorSt = styled.section`
@@ -69,10 +68,10 @@ const NoteInput = styled.textarea`
   resize: none;
 `;
 
-const RoundButton = Button.extend`
+const RoundButton = styled.button`
   width: 3rem;
   height: 3rem;
-  border-none;
+  border: none;
   border-radius: 50%;
   background-color: #343434;
   background-image: url(${checkMark});
@@ -80,9 +79,10 @@ const RoundButton = Button.extend`
   background-repeat: no-repeat;
   background-size: 1rem 1rem;
   outline: none;
+  cursor: pointer;
   &:active {
-    background-size: .95rem .95rem;
-    box-shadow: inset 0 0 5px 5px rgba(0,0,0,0.25);
+    background-size: 0.95rem 0.95rem;
+    box-shadow: inset 0 0 5px 5px rgba(0, 0, 0, 0.25);
   }
 `;
 
