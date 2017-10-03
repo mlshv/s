@@ -8,11 +8,11 @@ const EditorSt = styled.section`
   display: flex;
   flex-wrap: wrap;
   margin: 0rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   padding: 0;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   @media screen and (min-width: 48rem) {
-    margin: .5rem;
+    margin: 0.5rem;
     margin-top: 1rem;
   }
 `;
@@ -35,7 +35,7 @@ const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
   flex-basis: 100%;
-  padding: .5rem;
+  padding: 0.5rem;
   padding-top: 0;
   background: #fff;
   border-bottom-left-radius: inherit;
@@ -44,7 +44,7 @@ const Buttons = styled.div`
 
 const TitleInput = styled.input`
   flex-basis: 100%;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   padding: 0;
   font-family: 'Roboto', sans-serif;
   font-size: 1.25rem;
@@ -58,7 +58,7 @@ const TitleInput = styled.input`
 const NoteInput = styled.textarea`
   flex-basis: 100%;
   min-height: 100px;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   padding: 0;
   font-size: 1rem;
   font-family: 'Roboto', sans-serif;
@@ -70,18 +70,20 @@ const NoteInput = styled.textarea`
 `;
 
 const RoundButton = Button.extend`
-  padding: 1rem;
+  width: 3rem;
+  height: 3rem;
   border-none;
   border-radius: 50%;
-  background: #343434;
-`;
-
-const CheckMark = styled.span`
-  display: block;
-  width: 1rem;
-  height: 1rem;
-  background: url(${checkMark});
-  content: " ";
+  background-color: #343434;
+  background-image: url(${checkMark});
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 1rem 1rem;
+  outline: none;
+  &:active {
+    background-size: .95rem .95rem;
+    box-shadow: inset 0 0 5px 5px rgba(0,0,0,0.25);
+  }
 `;
 
 class Editor extends Component {
@@ -141,9 +143,7 @@ class Editor extends Component {
               <Buttons>
                 <div />
                 <div>
-                  <RoundButton onClick={this.save}>
-                    <CheckMark alt="" />
-                  </RoundButton>
+                  <RoundButton onClick={this.save} />
                 </div>
               </Buttons>
             </EditorSt>
