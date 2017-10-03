@@ -6,12 +6,9 @@ import NoteEditor from './Notes/Editor';
 import Notes from './Notes/List';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      notes: [],
-    };
-  }
+  state = {
+    notes: [],
+  };
 
   componentDidMount() {
     this.fetchNotes();

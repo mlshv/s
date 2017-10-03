@@ -87,14 +87,23 @@ const RoundButton = styled.button`
 `;
 
 class Editor extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-      note: '',
-    };
-    this.save = this.save.bind(this);
-  }
+  state = {
+    title: '',
+    note: '',
+  };
+
+  getRandomPlaceholder = () => {
+    const placeholders = [
+      'Go note or go home',
+      'Note hard, play hard',
+      'Your note or your life',
+      'Your credit card number and PIN',
+      'Note up and note down',
+      'A day without a note is a day wasted',
+      'Spend some bytes',
+    ];
+    return placeholders[Math.floor(Math.random() * placeholders.length)];
+  };
 
   handleTitleChange = (e) => {
     this.setState({ title: e.target.value });
@@ -104,7 +113,7 @@ class Editor extends Component {
     this.setState({ text: e.target.value });
   };
 
-  save() {
+  save = () => {
     const title = this.state.title ? this.state.title.trim() : undefined;
     const text = this.state.text ? this.state.text.trim() : undefined;
     if (!text) {
@@ -118,7 +127,7 @@ class Editor extends Component {
         this.setState({ title: '', text: '' });
       },
     );
-  }
+  };
 
   render() {
     return (
@@ -128,12 +137,12 @@ class Editor extends Component {
             <EditorSt>
               <TextInputs>
                 <TitleInput
-                  placeholder="Title..."
+                  placeholder="Title"
                   onChange={this.handleTitleChange}
                   value={this.state.title}
                 />
                 <NoteInput
-                  placeholder="Go note or go home..."
+                  placeholder={this.getRandomPlaceholder()}
                   onChange={this.handleNoteChange}
                   value={this.state.text}
                 />
