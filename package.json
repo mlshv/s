@@ -9,6 +9,7 @@
   "homepage": "http://mlshv.me/s",
   "dependencies": {
     "axios": "^0.16.2",
+    "babel-eslint": "^8.0.1",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "flexboxgrid2": "^7.0.0-alpha7",

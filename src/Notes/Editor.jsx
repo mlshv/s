@@ -93,18 +93,16 @@ class Editor extends Component {
       title: '',
       note: '',
     };
-    this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleNoteChange = this.handleNoteChange.bind(this);
     this.save = this.save.bind(this);
   }
 
-  handleTitleChange(e) {
+  handleTitleChange = (e) => {
     this.setState({ title: e.target.value });
-  }
+  };
 
-  handleNoteChange(e) {
+  handleNoteChange = (e) => {
     this.setState({ text: e.target.value });
-  }
+  };
 
   save() {
     const title = this.state.title ? this.state.title.trim() : undefined;

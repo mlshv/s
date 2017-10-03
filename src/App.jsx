@@ -11,37 +11,32 @@ class App extends Component {
     this.state = {
       notes: [],
     };
-    this.fetchNotes = this.fetchNotes.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleSave = this.handleSave.bind(this);
   }
 
   componentDidMount() {
     this.fetchNotes();
   }
 
-  fetchNotes() {
+  fetchNotes = () => {
     ApiManager.fetchNotes().then(
       (res) => {
-        console.log(res.data);
         this.setState({ notes: res.data });
       },
       () => {
-        console.log('cannot update');
+        // TODO: show error message
       },
     );
-  }
+  };
 
-  handleSave(note) {
-    return new Promise((resolve, reject) =>
+  handleSave = note =>
+    new Promise((resolve, reject) =>
       ApiManager.saveNote(note).then(() => {
         this.fetchNotes();
         resolve(1);
       }, reject),
     );
-  }
 
-  handleDelete(noteIndex) {
+  handleDelete = (noteIndex) => {
     const removeNote = (index) => {
       this.setState(prevState => ({
         notes: [...prevState.notes.slice(0, index), ...prevState.notes.slice(index + 1)],
@@ -55,7 +50,7 @@ class App extends Component {
         console.log('cannot delete');
       },
     );
-  }
+  };
 
   render() {
     return (
@@ -65,11 +60,12 @@ class App extends Component {
             <Route
               exact
               path={process.env.REACT_APP_ROOT_URL}
-              render={() =>
-                (<div>
+              render={() => (
+                <div>
                   <NoteEditor handleSave={this.handleSave} />
                   <Notes notes={this.state.notes} handleDelete={this.handleDelete} />
-                </div>)}
+                </div>
+              )}
             />
           </Switch>
         </div>
