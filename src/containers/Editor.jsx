@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import checkMark from '../icons/check_mark.svg';
+import checkMark from '../style/icons/check_mark.svg';
+import { changeTitle, changeText, saveNote } from '../actions/editor';
 
 const EditorSt = styled.section`
   display: flex;
@@ -87,9 +89,12 @@ const RoundButton = styled.button`
 `;
 
 class Editor extends Component {
-  state = {
-    title: '',
-    note: '',
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
+    changeTitle: PropTypes.func.isRequired,
+    changeText: PropTypes.func.isRequired,
+    saveNote: PropTypes.func.isRequired,
   };
 
   getRandomPlaceholder = () => {
@@ -105,28 +110,13 @@ class Editor extends Component {
     return placeholders[Math.floor(Math.random() * placeholders.length)];
   };
 
-  handleTitleChange = (e) => {
-    this.setState({ title: e.target.value });
-  };
-
-  handleNoteChange = (e) => {
-    this.setState({ text: e.target.value });
-  };
-
   save = () => {
     const title = this.state.title ? this.state.title.trim() : undefined;
     const text = this.state.text ? this.state.text.trim() : undefined;
     if (!text) {
       return;
     }
-    this.props.handleSave({ title, text }).then(
-      () => {
-        this.setState({ title: '', text: '' });
-      },
-      () => {
-        this.setState({ title: '', text: '' });
-      },
-    );
+    this.props.saveNote({ title, text });
   };
 
   render() {
@@ -138,19 +128,21 @@ class Editor extends Component {
               <TextInputs>
                 <TitleInput
                   placeholder="Title"
-                  onChange={this.handleTitleChange}
-                  value={this.state.title}
+                  onChange={e => this.props.changeTitle(e.target.value)}
+                  value={this.props.title}
                 />
                 <NoteInput
                   placeholder={this.getRandomPlaceholder()}
-                  onChange={this.handleNoteChange}
-                  value={this.state.text}
+                  onChange={e => this.props.changeText(e.target.value)}
+                  value={this.props.text}
                 />
               </TextInputs>
               <Buttons>
                 <div />
                 <div>
-                  <RoundButton onClick={this.save} />
+                  <RoundButton
+                    onClick={() => this.props.saveNote(this.props.title, this.props.text)}
+                  />
                 </div>
               </Buttons>
             </EditorSt>
@@ -161,8 +153,9 @@ class Editor extends Component {
   }
 }
 
-Editor.propTypes = {
-  handleSave: PropTypes.func.isRequired,
-};
+const mapStateToProps = state => ({
+  title: state.editor.title,
+  text: state.editor.text,
+});
 
-export default Editor;
+export default connect(mapStateToProps, { changeTitle, changeText, saveNote })(Editor);

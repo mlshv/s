@@ -13,10 +13,9 @@ This is my personal yet public board for saving links, copypastas, etc.
 
 ### I make it because
 * Sometimes I need quickly save something (like Google Keep) without logging in and simply open it later without remembering or writing down the link (like pastebin.com)
-* I need a pet project to practice React
+* I need a pet project to practice React / Redux
 
 ### TODO:
-* Redux
 * Loading animations
 * Errors display
 * Better desktop grid layout

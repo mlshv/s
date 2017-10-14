@@ -46,11 +46,7 @@ const Note = props => (
       <Linkify>{props.text}</Linkify>
     </Text>
     <Buttons>
-      <Button
-        onClick={() => {
-          props.handleDelete(props.id);
-        }}
-      >
+      <Button onClick={props.handleDelete}>
         <i className="fa fa-lg fa-trash" />
       </Button>
     </Buttons>
@@ -58,7 +54,6 @@ const Note = props => (
 );
 
 Note.propTypes = {
-  id: PropTypes.number.isRequired,
   title: PropTypes.string,
   text: PropTypes.string.isRequired,
   handleDelete: PropTypes.func.isRequired,

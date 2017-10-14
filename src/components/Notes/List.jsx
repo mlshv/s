@@ -8,7 +8,11 @@ const List = props => (
     <div className="row">
       {props.notes.map((note, index) => (
         <div className="col-xs-12 col-md-4 col-lg-3" key={note._id}>
-          <Note title={note.title} text={note.text} id={index} handleDelete={props.handleDelete} />
+          <Note
+            title={note.title}
+            text={note.text}
+            handleDelete={() => props.handleDelete(note._id, index)}
+          />
         </div>
       ))}
     </div>
@@ -17,7 +21,6 @@ const List = props => (
 
 List.propTypes = {
   notes: PropTypes.array.isRequired,
-  handleDelete: PropTypes.func.isRequired,
 };
 
 export default List;

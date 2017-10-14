@@ -62,7 +62,7 @@ apiRouter
     note.text = req.body.text;
     note.save((err) => {
       if (err) res.send(err);
-      res.json({ message: 'Note successfully added!' });
+      res.json(note);
     });
   })
   .delete((req, res) => {
