@@ -23,6 +23,6 @@ export function saveNote(title, text) {
   }
   return {
     type: 'NOTE_SAVE_REQUESTED',
-    payload: { titleTrimmed, textTrimmed },
+    payload: { title: titleTrimmed, text: textTrimmed },
   };
 }
