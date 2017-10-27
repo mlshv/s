@@ -13,9 +13,7 @@ export function changeText(nextText) {
 }
 
 export function saveNote(title, text) {
-  const titleTrimmed = title.trim() ? title.trim() : undefined;
-  const textTrimmed = text.trim() ? text.trim() : undefined;
-  if (!textTrimmed) {
+  if (!text) {
     return {
       type: 'NOTE_SAVE_FAILED',
       error: 'Text string can\'t be blank!',
@@ -23,6 +21,6 @@ export function saveNote(title, text) {
   }
   return {
     type: 'NOTE_SAVE_REQUESTED',
-    payload: { title: titleTrimmed, text: textTrimmed },
+    payload: { title, text },
   };
 }

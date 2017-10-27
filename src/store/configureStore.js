@@ -9,6 +9,7 @@ const initialState = {
   editor: {
     title: '',
     text: '',
+    noteSaveInProgress: false,
   },
 };
 

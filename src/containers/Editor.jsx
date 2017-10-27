@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import checkMark from '../style/icons/check_mark.svg';
+import spinner from '../style/icons/spinner.gif';
 import { changeTitle, changeText, saveNote } from '../actions/editor';
 
 const EditorSt = styled.section`
@@ -76,15 +77,15 @@ const RoundButton = styled.button`
   border: none;
   border-radius: 50%;
   background-color: #343434;
-  background-image: url(${checkMark});
+  background-image: url(${props => (props.loading ? spinner : checkMark)});
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  background-size: 1rem 1rem;
+  background-size: ${props => (props.loading ? '1.5rem' : '1rem')};
   outline: none;
   cursor: pointer;
   &:active {
-    background-size: 0.95rem 0.95rem;
-    box-shadow: inset 0 0 5px 5px rgba(0, 0, 0, 0.25);
+    background-size: ${props => (props.loading ? '1.5rem' : '0.95rem')};
+    box-shadow: ${props => (props.loading ? 'none' : 'inset 0 0 5px 5px rgba(0, 0, 0, 0.25)')};
   }
 `;
 
@@ -108,10 +109,16 @@ class Editor extends Component {
     changeTitle: PropTypes.func.isRequired,
     changeText: PropTypes.func.isRequired,
     saveNote: PropTypes.func.isRequired,
+    noteSaveInProgress: PropTypes.bool.isRequired,
   };
 
   state = {
     placeholder: getRandomPlaceholder(),
+  };
+
+  componentDidMount() {
+    // preload spinner
+    new Image().src = spinner;
   }
 
   save = () => {
@@ -125,6 +132,7 @@ class Editor extends Component {
   };
 
   render() {
+    const { title, text, noteSaveInProgress } = this.props;
     return (
       <div className="container">
         <div className="row">
@@ -134,20 +142,18 @@ class Editor extends Component {
                 <TitleInput
                   placeholder="Title"
                   onChange={e => this.props.changeTitle(e.target.value)}
-                  value={this.props.title}
+                  value={title}
                 />
                 <NoteInput
                   placeholder={this.state.placeholder}
                   onChange={e => this.props.changeText(e.target.value)}
-                  value={this.props.text}
+                  value={text}
                 />
               </TextInputs>
               <Buttons>
                 <div />
                 <div>
-                  <RoundButton
-                    onClick={this.save}
-                  />
+                  <RoundButton onClick={this.save} loading={noteSaveInProgress} />
                 </div>
               </Buttons>
             </EditorSt>
@@ -161,6 +167,7 @@ class Editor extends Component {
 const mapStateToProps = state => ({
   title: state.editor.title,
   text: state.editor.text,
+  noteSaveInProgress: state.editor.noteSaveInProgress,
 });
 
 export default connect(mapStateToProps, { changeTitle, changeText, saveNote })(Editor);

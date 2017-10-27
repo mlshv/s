@@ -16,7 +16,6 @@ This is my personal yet public board for saving links, copypastas, etc.
 * I need a pet project to practice React / Redux
 
 ### TODO:
-* Loading animations
 * Errors display
 * Better desktop grid layout
 
