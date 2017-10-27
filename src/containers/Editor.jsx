@@ -88,6 +88,19 @@ const RoundButton = styled.button`
   }
 `;
 
+const getRandomPlaceholder = () => {
+  const placeholders = [
+    'Go note or go home',
+    'Note hard, play hard',
+    'Your note or your life',
+    'Your credit card number and PIN',
+    'Note up and note down',
+    'A day without a note is a day wasted',
+    'Spend some bytes',
+  ];
+  return placeholders[Math.floor(Math.random() * placeholders.length)];
+};
+
 class Editor extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
@@ -97,26 +110,18 @@ class Editor extends Component {
     saveNote: PropTypes.func.isRequired,
   };
 
-  getRandomPlaceholder = () => {
-    const placeholders = [
-      'Go note or go home',
-      'Note hard, play hard',
-      'Your note or your life',
-      'Your credit card number and PIN',
-      'Note up and note down',
-      'A day without a note is a day wasted',
-      'Spend some bytes',
-    ];
-    return placeholders[Math.floor(Math.random() * placeholders.length)];
-  };
+  state = {
+    placeholder: getRandomPlaceholder(),
+  }
 
   save = () => {
-    const title = this.state.title ? this.state.title.trim() : undefined;
-    const text = this.state.text ? this.state.text.trim() : undefined;
+    const title = this.props.title ? this.props.title.trim() : undefined;
+    const text = this.props.text ? this.props.text.trim() : undefined;
     if (!text) {
       return;
     }
-    this.props.saveNote({ title, text });
+    this.props.saveNote(title, text);
+    this.setState({ placeholder: getRandomPlaceholder() });
   };
 
   render() {
@@ -132,7 +137,7 @@ class Editor extends Component {
                   value={this.props.title}
                 />
                 <NoteInput
-                  placeholder={this.getRandomPlaceholder()}
+                  placeholder={this.state.placeholder}
                   onChange={e => this.props.changeText(e.target.value)}
                   value={this.props.text}
                 />
@@ -141,7 +146,7 @@ class Editor extends Component {
                 <div />
                 <div>
                   <RoundButton
-                    onClick={() => this.props.saveNote(this.props.title, this.props.text)}
+                    onClick={this.save}
                   />
                 </div>
               </Buttons>
