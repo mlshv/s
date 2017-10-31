@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/favicon.ico" style="margin-bottom: 12px;" />
+  <img src="public/favicon.ico" style="margin-bottom: 12px; width: 64px;" />
   <br />
   <i>s stands for save, sync, and simple</i>
 </p>
