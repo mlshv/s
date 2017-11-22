@@ -18,6 +18,7 @@ This is my personal yet public board for saving links, copypastas, etc.
 ### TODO:
 * Errors display
 * Better desktop grid layout
+* Broader, higher textarea
 
 <p align="center">
   <img src="screenshot.png" width="320" />
