@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Linkify from 'react-linkify';
 import styled from 'styled-components';
 import Button from '../common/Button';
+import spinner from '../../style/icons/spinner.gif';
 
 const NoteSt = styled.div`
   margin: 0.5rem -0.5rem;
@@ -39,15 +40,34 @@ const Text = styled.p`
   word-wrap: break-word;
 `;
 
+const FaIcon = styled.div`margin: 3px 0 3px;`;
+
+const Spinner = styled.img`
+  display: block;
+  width: 1.25rem;
+`;
+
 const Note = props => (
   <NoteSt>
     {props.title && <Title>{props.title}</Title>}
     <Text>
-      <Linkify>{props.text}</Linkify>
+      <Linkify>
+        {props.text.split('\n').map((line, key) => (
+          // eslint-disable-next-line
+          <span key={key}>
+            {line}
+            <br />
+          </span>
+        ))}
+      </Linkify>
     </Text>
     <Buttons>
-      <Button onClick={props.handleDelete}>
-        <i className="fa fa-lg fa-trash" />
+      <Button onClick={props.handleDelete} isDeleting={props.isDeleting}>
+        {props.isDeleting ? (
+          <Spinner src={spinner} alt="" />
+        ) : (
+          <FaIcon className="fa fa-lg fa-trash" />
+        )}
       </Button>
     </Buttons>
   </NoteSt>
@@ -56,6 +76,7 @@ const Note = props => (
 Note.propTypes = {
   title: PropTypes.string,
   text: PropTypes.string.isRequired,
+  isDeleting: PropTypes.bool.isRequired,
   handleDelete: PropTypes.func.isRequired,
 };
 

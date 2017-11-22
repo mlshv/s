@@ -1,2 +1,2 @@
 web: react-scripts start
-api: nodemon server.js --exitcrash
+api: nodemon --exitcrash server.js

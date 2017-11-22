@@ -14,11 +14,16 @@ class App extends Component {
         id: PropTypes.number,
         title: PropTypes.string,
         text: PropTypes.string,
+        isDeleting: PropTypes.bool,
         handleDelete: PropTypes.func,
       }),
-    ).isRequired,
+    ),
     fetchNotes: PropTypes.func.isRequired,
     deleteNote: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    notes: [],
   };
 
   componentDidMount() {
@@ -36,7 +41,10 @@ class App extends Component {
               render={() => (
                 <div>
                   <NoteEditor />
-                  <Notes notes={this.props.notes} handleDelete={this.props.deleteNote} />
+                  <Notes
+                    notes={this.props.notes}
+                    handleDelete={this.props.deleteNote}
+                  />
                 </div>
               )}
             />

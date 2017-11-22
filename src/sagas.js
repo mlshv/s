@@ -22,9 +22,9 @@ function* saveNote(action) {
 function* deleteNote(action) {
   try {
     yield call(Api.deleteNote, action.payload.id);
-    yield put({ type: 'NOTE_DELETE_SUCCEEDED', payload: action.payload.index });
+    yield put({ type: 'NOTE_DELETE_SUCCEEDED', payload: action.payload.id });
   } catch (e) {
-    yield put({ type: 'NOTE_DELETE_FAILED' });
+    yield put({ type: 'NOTE_DELETE_FAILED', payload: action.payload.id });
   }
 }
 

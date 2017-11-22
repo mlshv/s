@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Note from './Note';
 
-const ListStyled = styled.div`
-  padding-bottom: .5rem;
-`;
+const ListStyled = styled.div`padding-bottom: 0.5rem;`;
 
 const List = props => (
   <ListStyled>
@@ -17,6 +15,7 @@ const List = props => (
             <Note
               title={note.title}
               text={note.text}
+              isDeleting={note.isDeleting}
               handleDelete={() => props.handleDelete(note._id, index)}
             />
           </div>
@@ -27,7 +26,19 @@ const List = props => (
 );
 
 List.propTypes = {
-  notes: PropTypes.array.isRequired,
+  notes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      text: PropTypes.string,
+      isDeleting: PropTypes.bool,
+      handleDelete: PropTypes.func,
+    }),
+  ),
+};
+
+List.defaultProps = {
+  notes: [],
 };
 
 export default List;
