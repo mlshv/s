@@ -3,9 +3,14 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import NoteEditor from './Editor';
 import Notes from '../components/Notes/List';
 import { fetchNotes, deleteNote } from '../actions/notes';
+
+const Root = styled.main`
+  padding: 0.5rem;
+`;
 
 class App extends Component {
   static propTypes = {
@@ -33,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <Root>
           <Switch>
             <Route
               exact
@@ -49,7 +54,7 @@ class App extends Component {
               )}
             />
           </Switch>
-        </div>
+        </Root>
       </BrowserRouter>
     );
   }

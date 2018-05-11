@@ -9,13 +9,11 @@ import { changeTitle, changeText, saveNote } from '../actions/editor';
 const EditorSt = styled.section`
   display: flex;
   flex-wrap: wrap;
-  margin: 0rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem -0.5rem 0 -0.5rem;
   padding: 0;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   @media screen and (min-width: 48rem) {
-    margin: 0.5rem;
-    margin-top: 1rem;
+    margin: 1rem 0 0.5rem 0;
   }
 `;
 
@@ -136,7 +134,7 @@ class Editor extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-xs-12 col-md-8 col-md-offset-2">
+          <div className="col-xs-12 col-md-8 col-md-offset-2 col-lg-offset-3 col-lg-6">
             <EditorSt>
               <TextInputs>
                 <TitleInput
