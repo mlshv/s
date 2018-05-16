@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import checkMark from '../style/icons/check_mark.svg';
-import spinner from '../style/icons/spinner.gif';
-import { changeTitle, changeText, saveNote } from '../actions/editor';
+import checkMark from 'style/icons/check_mark.svg';
+import spinner from 'style/icons/spinner.gif';
+import { changeTitle, changeText, saveNote } from './actions';
 
 const EditorSt = styled.section`
   display: flex;

@@ -8,5 +8,12 @@
   },
   "rules": {
     "react/forbid-prop-types": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["./src"]
+      }
+    }
   }
 }

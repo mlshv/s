@@ -4,9 +4,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import NoteEditor from './Editor';
-import Notes from '../components/Notes/List';
-import { fetchNotes, deleteNote } from '../actions/notes';
+import NoteEditor from 'containers/Editor';
+import NotesList from 'components/NotesList';
+import { fetchNotes, deleteNote } from './actions';
 
 const Root = styled.main`
   padding: 0.5rem;
@@ -44,13 +44,13 @@ class App extends Component {
               exact
               path={process.env.REACT_APP_ROOT_URL}
               render={() => (
-                <div>
+                <React.Fragment>
                   <NoteEditor />
-                  <Notes
+                  <NotesList
                     notes={this.props.notes}
                     handleDelete={this.props.deleteNote}
                   />
-                </div>
+                </React.Fragment>
               )}
             />
           </Switch>
