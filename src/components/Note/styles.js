@@ -8,6 +8,7 @@ export const NoteSt = styled.div`
   padding: 1rem 0.5rem 0.5rem 1rem;
   border-radius: 0.25rem;
   background: #fff;
+  box-shadow: 0 2px #997f00;
   @media screen and (min-width: 48rem) {
     margin: 0.5rem 0;
     padding-bottom: 0;
