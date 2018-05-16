@@ -1,30 +1,26 @@
-import axios from 'axios';
-
 const API_URL = process.env.REACT_APP_API_URL;
 
 export default {
   fetchNotes() {
-    return new Promise((resolve, reject) => {
-      axios.get(`${API_URL}/notes`).then(resolve).catch(reject);
-    });
+    return fetch(`${API_URL}/notes`).then(response => response.json());
   },
   saveNote(note) {
-    return new Promise((resolve, reject) => {
-      axios.post(`${API_URL}/notes`, note).then(resolve).catch(reject);
-    });
+    return fetch(`${API_URL}/notes`, {
+      method: 'POST',
+      body: JSON.stringify(note),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }).then(response => response.json());
   },
   deleteNote(note) {
-    return new Promise((resolve, reject) => {
-      axios
-        .delete(`${API_URL}/notes`, { params: { id: note } })
-        .then((response) => {
-          if (response.data.success) {
-            resolve();
-          } else {
-            reject();
-          }
-        }, reject)
-        .catch(reject);
-    });
+    return fetch(`${API_URL}/notes?id=${note}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }).then(response => response.json());
   },
 };

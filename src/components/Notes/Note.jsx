@@ -56,7 +56,7 @@ const Note = props => (
     {props.title && <Title>{props.title}</Title>}
     <Text>
       <Linkify>
-        {props.text.split('\n').map((line, key) => (
+        {props.text && props.text.split('\n').map((line, key) => (
           // eslint-disable-next-line
           <span key={key}>
             {line}

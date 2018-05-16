@@ -4,7 +4,7 @@ import Api from './ApiManager';
 function* fetchNotes() {
   try {
     const res = yield call(Api.fetchNotes);
-    yield put({ type: 'NOTES_FETCH_SUCCEEDED', payload: res.data });
+    yield put({ type: 'NOTES_FETCH_SUCCEEDED', payload: res });
   } catch (e) {
     yield put({ type: 'NOTES_FETCH_FAILED', message: e.message });
   }
@@ -13,7 +13,7 @@ function* fetchNotes() {
 function* saveNote(action) {
   try {
     const res = yield call(Api.saveNote, action.payload);
-    yield put({ type: 'NOTE_SAVE_SUCCEEDED', payload: res.data });
+    yield put({ type: 'NOTE_SAVE_SUCCEEDED', payload: res });
   } catch (e) {
     yield put({ type: 'NOTE_SAVE_FAILED' });
   }
@@ -21,8 +21,12 @@ function* saveNote(action) {
 
 function* deleteNote(action) {
   try {
-    yield call(Api.deleteNote, action.payload.id);
-    yield put({ type: 'NOTE_DELETE_SUCCEEDED', payload: action.payload.id });
+    const response = yield call(Api.deleteNote, action.payload.id);
+    if (response.success) {
+      yield put({ type: 'NOTE_DELETE_SUCCEEDED', payload: action.payload.id });
+    } else {
+      throw new Error();
+    }
   } catch (e) {
     yield put({ type: 'NOTE_DELETE_FAILED', payload: action.payload.id });
   }

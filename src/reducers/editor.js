@@ -5,12 +5,12 @@ export default (
   switch (action.type) {
     case 'TITLE_CHANGED':
       return {
-        title: action.payload,
+        ...state,
         text: state.text,
       };
     case 'TEXT_CHANGED':
       return {
-        title: state.title,
+        ...state,
         text: action.payload,
       };
     case 'NOTE_SAVE_SUCCEEDED':
@@ -21,10 +21,12 @@ export default (
       };
     case 'NOTE_SAVE_REQUESTED':
       return {
+        ...state,
         noteSaveInProgress: true,
       };
     case 'NOTE_SAVE_FAILED':
       return {
+        ...state,
         noteSaveInProgress: false,
       };
     default:
