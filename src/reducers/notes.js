@@ -12,7 +12,7 @@ export default (state = [], action) => {
       const index = state.findIndex(note => note._id === action.payload); // eslint-disable-line
       return [...state.slice(0, index), ...state.slice(index + 1, state.length)];
     case 'NOTE_SAVE_SUCCEEDED':
-      return [action.payload, ...state];
+      return [{ ...action.payload, isDeleting: false }, ...state];
     case 'NOTES_FETCH_REQUESTED':
     case 'NOTES_FETCH_FAILED':
     default:
