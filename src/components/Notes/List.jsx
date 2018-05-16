@@ -5,8 +5,8 @@ import Note from './Note';
 
 const List = props => (
   <div className="container">
-    {props.notes.map((note, index) => (
-      <div className="row">
+    <div className="row">
+      {props.notes.map((note, index) => (
         <div className="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3" key={note._id}>
           <Note
             title={note.title}
@@ -15,8 +15,8 @@ const List = props => (
             handleDelete={() => props.handleDelete(note._id, index)}
           />
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 );
 

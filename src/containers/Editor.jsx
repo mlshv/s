@@ -8,42 +8,30 @@ import { changeTitle, changeText, saveNote } from '../actions/editor';
 
 const EditorSt = styled.section`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
   margin: 0.5rem -0.5rem 0 -0.5rem;
-  padding: 0;
+  padding: 1rem 0.5rem 0.5rem 1rem;
   border-radius: 0.25rem;
+  background: #fff;
   @media screen and (min-width: 48rem) {
     margin: 1rem 0 0.5rem 0;
+    padding: 1.5rem 0.5rem 0.5rem 1.5rem;
   }
 `;
 
 const TextInputs = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-basis: 100%;
-  padding: 1rem;
-  padding-bottom: 0rem;
-  background: #fff;
-  border-top-left-radius: inherit;
-  border-top-right-radius: inherit;
-  @media screen and (min-width: 48rem) {
-    padding: 1.5rem;
-  }
+  flex-grow: 1;
 `;
 
 const Buttons = styled.div`
   display: flex;
+  align-items: flex-end;
   justify-content: space-between;
-  flex-basis: 100%;
-  padding: 0.5rem;
   padding-top: 0;
-  background: #fff;
-  border-bottom-left-radius: inherit;
-  border-bottom-right-radius: inherit;
 `;
 
 const TitleInput = styled.input`
-  flex-basis: 100%;
+  width: 100%;
   margin-bottom: 0.5rem;
   padding: 0;
   font-family: 'Roboto', sans-serif;
@@ -56,7 +44,7 @@ const TitleInput = styled.input`
 `;
 
 const NoteInput = styled.textarea`
-  flex-basis: 100%;
+  width: 100%;
   min-height: 100px;
   margin-bottom: 0.5rem;
   padding: 0;
