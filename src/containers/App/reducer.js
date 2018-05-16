@@ -1,20 +1,53 @@
-export default (state = [], action) => {
+export default (state = { notes: [], isFetching: false }, action) => {
+  const index = // eslint-disable-next-line no-underscore-dangle
+    Number.isInteger(action.payload) && state.notes.findIndex(note => note._id === action.payload);
+
   switch (action.type) {
-    case 'NOTES_FETCH_SUCCEEDED':
-      return action.payload.map(note => ({ ...note, isDeleting: false }));
-    case 'NOTE_DELETE_REQUESTED':
-      return [
-        ...state.slice(0, action.payload.index),
-        { ...state[action.payload.index], isDeleting: true },
-        ...state.slice(action.payload.index + 1, state.length),
-      ];
-    case 'NOTE_DELETE_SUCCEEDED': // eslint-disable-line
-      const index = state.findIndex(note => note._id === action.payload); // eslint-disable-line
-      return [...state.slice(0, index), ...state.slice(index + 1, state.length)];
-    case 'NOTE_SAVE_SUCCEEDED':
-      return [{ ...action.payload, isDeleting: false }, ...state];
     case 'NOTES_FETCH_REQUESTED':
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case 'NOTES_FETCH_SUCCEEDED':
+      return {
+        ...state,
+        notes: action.payload.map(note => ({ ...note, isDeleting: false })),
+        isFetching: false,
+      };
     case 'NOTES_FETCH_FAILED':
+      return {
+        ...state,
+        isFetching: false,
+      };
+    case 'NOTE_DELETE_REQUESTED':
+      return {
+        ...state,
+        notes: [
+          ...state.notes.slice(0, action.payload.index),
+          { ...state.notes[action.payload.index], isDeleting: true },
+          ...state.notes.slice(action.payload.index + 1, state.notes.length),
+        ],
+      };
+    case 'NOTE_DELETE_SUCCEEDED':
+      return {
+        ...state,
+        notes: [
+          ...state.notes.slice(0, index),
+          ...state.notes.slice(index + 1, state.notes.length),
+        ],
+      };
+    case 'NOTE_DELETE_FAILED': // eslint-disable-line no-case-declarations
+      // eslint-disable-next-line no-underscore-dangle
+      return {
+        ...state,
+        notes: [
+          ...state.notes.slice(0, index),
+          { ...state.notes[index], isDeleting: false },
+          ...state.notes.slice(index + 1, state.notes.length),
+        ],
+      };
+    case 'NOTE_SAVE_SUCCEEDED':
+      return { ...state, notes: [{ ...action.payload, isDeleting: false }, ...state.notes] };
     default:
       return state;
   }

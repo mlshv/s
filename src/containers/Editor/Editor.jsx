@@ -95,7 +95,7 @@ class Editor extends Component {
     changeTitle: PropTypes.func.isRequired,
     changeText: PropTypes.func.isRequired,
     saveNote: PropTypes.func.isRequired,
-    noteSaveInProgress: PropTypes.bool.isRequired,
+    isNoteSaveInProgress: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -113,7 +113,7 @@ class Editor extends Component {
   };
 
   render() {
-    const { title, text, noteSaveInProgress } = this.props;
+    const { title, text, isNoteSaveInProgress } = this.props;
     return (
       <div className="container">
         <div className="row">
@@ -134,7 +134,7 @@ class Editor extends Component {
               <Buttons>
                 <div />
                 <div>
-                  <RoundButton onClick={this.save} loading={noteSaveInProgress} />
+                  <RoundButton onClick={this.save} loading={isNoteSaveInProgress} />
                 </div>
               </Buttons>
             </EditorSt>
@@ -148,7 +148,7 @@ class Editor extends Component {
 const mapStateToProps = state => ({
   title: state.editor.title,
   text: state.editor.text,
-  noteSaveInProgress: state.editor.noteSaveInProgress,
+  isNoteSaveInProgress: state.editor.isNoteSaveInProgress,
 });
 
 export default connect(mapStateToProps, { changeTitle, changeText, saveNote })(Editor);

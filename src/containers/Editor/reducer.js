@@ -1,12 +1,12 @@
 export default (
-  state = { title: '', text: '', noteSaveInProgress: false },
+  state = { title: '', text: '', isNoteSaveInProgress: false },
   action,
 ) => {
   switch (action.type) {
     case 'TITLE_CHANGED':
       return {
         ...state,
-        text: state.text,
+        title: action.payload,
       };
     case 'TEXT_CHANGED':
       return {
@@ -17,17 +17,17 @@ export default (
       return {
         title: '',
         text: '',
-        noteSaveInProgress: false,
+        isNoteSaveInProgress: false,
       };
     case 'NOTE_SAVE_REQUESTED':
       return {
         ...state,
-        noteSaveInProgress: true,
+        isNoteSaveInProgress: true,
       };
     case 'NOTE_SAVE_FAILED':
       return {
         ...state,
-        noteSaveInProgress: false,
+        isNoteSaveInProgress: false,
       };
     default:
       return state;
