@@ -102,11 +102,6 @@ class Editor extends Component {
     placeholder: getRandomPlaceholder(),
   };
 
-  componentDidMount() {
-    // preload spinner
-    new Image().src = spinner;
-  }
-
   save = () => {
     const title = this.props.title ? this.props.title.trim() : undefined;
     const text = this.props.text ? this.props.text.trim() : undefined;
