@@ -28,8 +28,10 @@ const Title = styled.h2`
 const Buttons = styled.div`
   display: flex;
   flex-direction: row-reverse;
-  padding-bottom: 0.5rem;
   margin: 0;
+  @media screen and (min-width: 48rem) {
+    padding-bottom: 0.5rem}
+  }
 `;
 
 const Text = styled.p`
