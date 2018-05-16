@@ -6,10 +6,9 @@
   "repository": "git@github.com:mlshv/s.git",
   "author": "Mikhail Malyshev <mlshv42@ya.ru>",
   "license": "MIT",
-  "homepage": "http://mlshv.me/s",
+  "homepage": "https://mlshv.me/s",
   "dependencies": {
     "axios": "^0.16.2",
-    "babel-eslint": "^8.0.1",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
     "flexboxgrid2": "^7.0.0-alpha7",
@@ -26,7 +25,6 @@
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.11",
     "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
     "redux-saga": "^0.15.6",
     "styled-components": "^2.1.2"
   },
@@ -39,6 +37,7 @@
     "deploy": "./deploy.sh"
   },
   "devDependencies": {
+    "babel-eslint": "^8.0.1",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
