@@ -1,6 +1,8 @@
 export default (state = { notes: [], isFetching: false }, action) => {
-  const index = // eslint-disable-next-line no-underscore-dangle
-    Number.isInteger(action.payload) && state.notes.findIndex(note => note._id === action.payload);
+  const index =
+    action.payload &&
+    action.payload.id && // eslint-disable-next-line no-underscore-dangle
+    state.notes.findIndex(note => note._id === action.payload.id);
 
   switch (action.type) {
     case 'NOTES_FETCH_REQUESTED':
@@ -25,7 +27,7 @@ export default (state = { notes: [], isFetching: false }, action) => {
         notes: [
           ...state.notes.slice(0, action.payload.index),
           { ...state.notes[action.payload.index], isDeleting: true },
-          ...state.notes.slice(action.payload.index + 1, state.notes.length),
+          ...state.notes.slice(action.payload.index + 1),
         ],
       };
     case 'NOTE_DELETE_SUCCEEDED':
@@ -33,17 +35,16 @@ export default (state = { notes: [], isFetching: false }, action) => {
         ...state,
         notes: [
           ...state.notes.slice(0, index),
-          ...state.notes.slice(index + 1, state.notes.length),
+          ...state.notes.slice(index + 1),
         ],
       };
     case 'NOTE_DELETE_FAILED': // eslint-disable-line no-case-declarations
-      // eslint-disable-next-line no-underscore-dangle
       return {
         ...state,
         notes: [
           ...state.notes.slice(0, index),
           { ...state.notes[index], isDeleting: false },
-          ...state.notes.slice(index + 1, state.notes.length),
+          ...state.notes.slice(index + 1),
         ],
       };
     case 'NOTE_SAVE_SUCCEEDED':

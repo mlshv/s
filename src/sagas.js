@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import { call, put, select, takeLatest, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import requests from 'requests';
-import { selectNotes } from 'containers/App/selectors';
 
 function* fetchNotes() {
   try {
@@ -22,18 +21,17 @@ function* saveNote(action) {
 }
 
 function* deleteNote(action) {
-  const notes = yield select(selectNotes);
-  const index = notes.findIndex(note => note._id === action.payload.id);
+  const { id } = action.payload;
 
   try {
     const response = yield call(requests.deleteNote, action.payload.id);
     if (response.success) {
-      yield put({ type: 'NOTE_DELETE_SUCCEEDED', payload: { index } });
+      yield put({ type: 'NOTE_DELETE_SUCCEEDED', payload: { id } });
     } else {
       throw new Error();
     }
   } catch (e) {
-    yield put({ type: 'NOTE_DELETE_FAILED', payload: { index } });
+    yield put({ type: 'NOTE_DELETE_FAILED', payload: { id } });
   }
 }
 
